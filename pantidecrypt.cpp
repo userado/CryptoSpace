@@ -1,26 +1,24 @@
-// CPP program for decoding the string
-// which generate using classical cipher
+// забележка: програмата е разработена под Линукс среда и може да не работи с Виндовс
 
 #include<bits/stdc++.h>
 using namespace std;
 
-// Original Set of letters
+// Набор от букви използвани в декриптирането
 string plaintext = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-// Function generates the encoded text
+//Функция генерираща кодирания текст
 string encoder(string key)
 {
 	string encoded = "";
 	bool arr[26] = {0};
 
-	// This loop inserts the keyword
-	// at the start of the encoded string
+//Този цъкъл въвежда ключовата дума в началото на криптиращия низ
 	for (int i=0; i<key.size(); i++)
 	{
 		if(key[i] >= 'A' && key[i] <= 'Z')
 		{
-			// To check whether the character is inserted
-			// earlier in the encoded string or not
+			
+//цикъл за проверка дали е въведен символ по-рано в криптирания низ
 			if (arr[key[i]-65] == 0)
 			{
 				encoded += key[i];
@@ -37,8 +35,7 @@ string encoder(string key)
 		}
 	}
 
-	// This loop inserts the remaining
-	// characters in the encoded string.
+//този цикъл въвежда останалите символи в криптиращия низ
 	for (int i=0; i<26; i++)
 	{
 		if(arr[i] == 0)
@@ -50,11 +47,10 @@ string encoder(string key)
 	return encoded;
 }
 
-// This function will decode the message
+// Тази функция ще разкодира съобщението
 string decipheredIt(string msg, string encoded)
 {
-	// Hold the position of every character (A-Z)
-	// from encoded string
+	// Функция за задържане на позицията на всяка буква в разкодираното съобщение
 	map <char,int> enc;
 	for(int i=0; i<encoded.size(); i++)
 	{
@@ -63,8 +59,8 @@ string decipheredIt(string msg, string encoded)
 
 	string decipher="";
 
-	// This loop deciphered the message.
-	// Spaces, special characters and numbers remain same.
+	//Този цикъл ще разкодира съобщението
+ //Интервалите, специалните знаци и номери остават същите
 	for (int i=0; i<msg.size(); i++)
 	{
 		if (msg[i] >='a' && msg[i] <='z')
@@ -85,7 +81,7 @@ string decipheredIt(string msg, string encoded)
 	return decipher;
 }
 
-// Driver code
+// Основен код
 int main()
 {
 	//Втора криптира част с шифъра на Цесар с измествания
@@ -98,18 +94,18 @@ int main()
 	c[i] = c[i] - n;
 	//край на част втора
 
-	// Hold the Keyword
+	// Тук влиза употребата на клавиатурата
     string key;
     cout << "Въведете ключовата дума: "; cin >> key;
     cout << "Избраната ключова дума е: " <<key << endl;
 
-	// Function call to generate encoded text
+	// Извикваща функция за кодираното съобщение
 	string encoded = encoder(key);
 
-	    // Message that need to encode
+	    // Съобщение за декодиране
     string message = c;
 
-	// Function call to print deciphered text
+	// Извикваща функция за отпечатване на разкодираният текст
 	cout << "Декриптираният текст е: " << decipheredIt(message,encoded) << endl;
 
 	return 0;
